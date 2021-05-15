@@ -69,8 +69,12 @@ def login(request):
     # else:
     #     return render(request,'login.html')
     return render(request,'login.html') 
+
+# for addition generator Page 
 def addition(request):
     return render(request,'Addition.html')
+
+# for multiplication generator Page 
 def multiplication(request):
     return render(request,'Multiplication.html')
 def division(request):
