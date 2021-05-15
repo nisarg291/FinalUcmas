@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Listening</title>
+    <style>
+        body{
+            background-color:cyan;
+        }
+        #dispaly_number{
+            font-size:80px !important;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div>
+            <div id="no_ques" style="display:none">{{no_of_questions}}</div>
+            <div id="n" class="mt-5" style="display:none;font-size:30px;color:red"></div>
+            {% for que in questions%}
+                
+                <div class="nums ml-1 mr-1 mt-5 col-2" style="display:none;border:1px solid black;">{{que.counter}}
+                {% for i in que%}
+                    {{i}}
+                {%endfor%}
+                </div>
+            {%endfor%}
+            {% for num in num1%}
+                <div class="num1" style="display: none;">{{num}}</div>
+            {%endfor%}
+            {% for num in num2%}
+                <div class="num2" style="display: none;">{{num}}</div>
+            {%endfor%}
+            {%for an in ans%}
+                <div class="ans" style="display:none">{{an}}</div>
+            {%endfor%}
+        </div>
+        <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">start</div>
+        <form action="division">
+            <Button class="btn btn-secondary ml-2" id="back" type="submit" style="position:absolute;top:80vh;left:85vw;display:none">Back</Button>
+            </form>
+        <!-- <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">Next</div> -->
+    </div>
+    <script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function speak1(){
+        num1=document.getElementsByClassName('num1');
+        num2=document.getElementsByClassName('num2');
+        n=document.getElementById('n');
+        ans=document.getElementsByClassName('ans');
+        no_ques=parseInt(document.getElementById('no_ques').value);
+        // no_rows=parseInt(document.getElementById('no_rows').value);
+        var i,j;
+        for(i=0;i<num1.length;i++){
+                n.style.display=''
+                n.innerHTML=String('Question No:'+(i+1))
+                console.log(String(num1[i].innerHTML))
+                console.log(String(num1[2].innerHTML))
+                var msg = new SpeechSynthesisUtterance(String(ans[i].innerHTML));
+                // msg.text=String(i);
+                msg.lang = 'en-US';
+                msg.rate = 2;
+                speechSynthesis.speak(msg);
+                await sleep(2000);
+                var msg = new SpeechSynthesisUtterance(String('Divide By'));
+                // msg.text=String(i);
+                msg.lang = 'en-US';
+                msg.rate = 2;
+                speechSynthesis.speak(msg);
+                await sleep(2000);
+                var msg = new SpeechSynthesisUtterance(String(num2[i].innerHTML));
+                // msg.text=String(i);
+                msg.lang = 'en-US';
+                msg.rate = 2;
+                speechSynthesis.speak(msg);
+                await sleep(3000);
+                speechSynthesis.speak(new SpeechSynthesisUtterance('that is ?'));
+                await sleep(5000);
+                speechSynthesis.speak(new SpeechSynthesisUtterance("Answer is "+String(num1[i].innerHTML)))
+                await sleep(2000);
+                if(i!=(num1.length-1)){
+                    speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    await sleep(1000)
+                }
+               
+        }
+        back.style.display='';
+        // function speak3(){
+        //     // back.style.display='';
+        //     window.location.href = "flash";
+        // }
+    }
+    // speak1()
+    
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
