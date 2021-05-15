@@ -31,19 +31,31 @@ def speak(audio):
     engine.runAndWait()
 # Create your views here.
 
-def index(request):
-    return render(request,'index.html')
+# for listening and flash menu page
+def listening_flash_menu(request):
+    return render(request,'listening_flash_menu.html')
 
+# for competitions page
 def competitions(request):
     return render(request,'competitions.html')
+
+# for gallary page
 def gallary(request):
     return render(request,'gallary.html')
+
+# for levels page
 def levels(request):
     return render(request,'levels.html')
+
+# for aboutus page
 def aboutus(request):
     return render(request,'aboutus.html')
+
+# for main home page
 def home(request):
     return render(request,'home.html')
+
+#for login page
 def login(request):
     if request.method=='POST':
         email=request.POST.get('email')
@@ -70,26 +82,39 @@ def login(request):
     #     return render(request,'login.html')
     return render(request,'login.html') 
 
-# for addition generator Page 
+# for addition Option Page for listening 
 def addition(request):
     return render(request,'Addition.html')
 
-# for multiplication generator Page 
+# for multiplication Option Page for listening 
 def multiplication(request):
     return render(request,'Multiplication.html')
+
+# for division Option Page for listening 
 def division(request):
     return render(request,'division.html')
+
+# for listening practice Page 
 def listening(request):
     return render(request,'listening.html')
+
+# for flash practice Page
 def flash(request):
     return render(request,'flash.html')
 
+# for addition Option Page for flash card
 def flash_addition(request):
     return render(request,'flash_addition.html')
+
+# for multiplication Option Page for flash card
 def flash_multiplication(request):
     return render(request,'flash_multiplication.html')
+
+# for division Option Page for flash card
 def flash_division(request):
     return render(request,'flash_division.html')
+
+#for logout page
 def logout(request):
     del request.session['email']
     del request.session['password']
@@ -100,7 +125,7 @@ def validate(request):
 
 
             
-
+# for addition generator page for flash card
 def generate_flash_addition(request):
     questions=[]
     ans1=[]
@@ -189,7 +214,7 @@ def generate_flash_addition(request):
           
         return render(request,"generate_flash_addition.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows,'questions_speed':questions_speed})
 
-   
+# for addition generator page for listening card   
 def generate_add(request):
     questions=[]
     ans1=[]
@@ -278,6 +303,8 @@ def generate_add(request):
         return render(request,"generate_add.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows})
     
     # return render(request,"generate.html",context=content)
+
+# for multiplication generator page for listening card
 def generate_multi(request):
     
     if request.method=="POST":
@@ -308,6 +335,7 @@ def generate_multi(request):
         }
         return render(request,"generate_multi.html",context)
 
+# for multiplication generator page for flash card
 def generate_flash_multi(request):
     if request.method=="POST":
         num1=[]
@@ -339,6 +367,7 @@ def generate_flash_multi(request):
         }
         return render(request,"generate_flash_multi.html",context)
 
+# for division generator page for listening card
 def generate_div(request):
    if request.method=="POST":
         num1=[]
@@ -369,6 +398,8 @@ def generate_div(request):
             'ans':ans
         }
         return render(request,'generate_div.html',context)
+
+# for division generator page for flash card
 def generate_flash_div(request):
     if request.method=="POST":
         num1=[]
