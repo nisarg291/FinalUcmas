@@ -30,11 +30,20 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 # Create your views here.
-def index(request):
 
+def index(request):
     return render(request,'index.html')
+
+def competitions(request):
+    return render(request,'competitions.html')
+def gallary(request):
+    return render(request,'gallary.html')
+def levels(request):
+    return render(request,'levels.html')
+def aboutus(request):
+    return render(request,'aboutus.html')
 def home(request):
-    return render(request,'Addition.html')
+    return render(request,'home.html')
 def login(request):
     if request.method=='POST':
         email=request.POST.get('email')
@@ -326,5 +335,65 @@ def generate_flash_multi(request):
         }
         return render(request,"generate_flash_multi.html",context)
 
+def generate_div(request):
+   if request.method=="POST":
+        num1=[]
+        num2=[]
+        ans=[]
+        questions=[]
+        division_options=request.POST.get("division_options")
+        no_of_first_digits,no_of_second_digits=division_options.split('÷');
+        no_of_first_digits=int(no_of_first_digits)-int(no_of_second_digits)
+        no_of_second_digits=int(no_of_second_digits)
+        no_of_questions=int(request.POST.get("questions"))
+        for que in range(0,no_of_questions):
+            question=[]
+            j=0
+            n1=random.randrange(int('1'*no_of_first_digits),int('9'*no_of_first_digits))
+            n2=random.randrange(int('1'*no_of_second_digits),int('9'*no_of_second_digits))
+            num1.append(n1)
+            num2.append(n2)
+            question.append(n1)
+            question.append(n2)
+            questions.append(question)
+            ans.append(n1*n2)
+        context={
+            'num1':num1,
+            'num2':num2,
+            'no_of_questions':no_of_questions,
+            'questions':questions,
+            'ans':ans
+        }
+        return render(request,'generate_div.html',context)
 def generate_flash_div(request):
-    return render(request,'generate_flash_div.html')
+    if request.method=="POST":
+        num1=[]
+        num2=[]
+        ans=[]
+        questions=[]
+        division_options=request.POST.get("division_options")
+        no_of_first_digits,no_of_second_digits=division_options.split('÷');
+        no_of_first_digits=int(no_of_first_digits)-int(no_of_second_digits)
+        no_of_second_digits=int(no_of_second_digits)
+        no_of_questions=int(request.POST.get("questions"))
+        questions_speed=int(request.POST.get('questions_speed'))
+        for que in range(0,no_of_questions):
+            question=[]
+            j=0
+            n1=random.randrange(int('1'*no_of_first_digits),int('9'*no_of_first_digits))
+            n2=random.randrange(int('1'*no_of_second_digits),int('9'*no_of_second_digits))
+            num1.append(n1)
+            num2.append(n2)
+            question.append(n1)
+            question.append(n2)
+            questions.append(question)
+            ans.append(n1*n2)
+        context={
+            'num1':num1,
+            'num2':num2,
+            'no_of_questions':no_of_questions,
+            'questions':questions,
+            'ans':ans,
+            'questions_speed':questions_speed,
+        }
+        return render(request,'generate_flash_div.html',context)

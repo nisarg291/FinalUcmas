@@ -21,11 +21,12 @@ from django.urls import path,include
 from . import views
 urlpatterns = [
     path("listening",views.listening,name="listening"),
-    path("",views.login,name="login"),
+    path("login",views.login,name="login"),
+    path("",views.home,name="home"),
     path("index",views.index,name="index"),
-    path("home",views.home,name="home"),
     path("generate_add",views.generate_add,name="generate_add"),
     path("generate_multi",views.generate_multi,name="generate_multi"),
+    path("generate_div",views.generate_div,name="generate_div"),
     path("addition",views.addition,name="addition"),
     path("division",views.division,name="division"),
     path("multiplication",views.multiplication,name="multiplication"),
@@ -35,7 +36,11 @@ urlpatterns = [
     path("generate_flash_addition",views.generate_flash_addition,name="generate_flash_addition"),
     path("generate_flash_multi",views.generate_flash_multi,name="generate_flash_multi"),
     path("generate_flash_div",views.generate_flash_div,name="generate_flash_div"),
-    path("logout",views.logout,name="logout"),
+    path("/logout",views.logout,name="logout"),
     path("flash",views.flash,name="flash"),
-    path("validate",views.validate,name="validate"),
+    path("/competitions",views.competitions,name="competitions"),
+    path("/gallary",views.gallary,name="gallary"),
+    path("/aboutus",views.aboutus,name="aboutus"),
+    path("/levels",views.levels,name="levels"),
+    path("/validate",views.validate,name="validate"),
 ]
