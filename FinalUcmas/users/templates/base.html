@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+     <style>
+     .alert-success {
+    margin-top: 100px !important;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+     body {
+  background: #333333 !important;
+  color: #ffffff !important;
+  margin-top: 5rem;
+}
+#poplist{
+     max-width: 100%;
+     background-color:#000000;/* Max Width of the popover (depending on the container!) */
+}
+.btn-success {
+    background-color: #5f788a;
+    /* border-color: #28a745; */
+}
+.text-muted {
+    color: #ffffff !important;
+}
+._8-yf5 {
+    display: block;
+    position: relative;
+    background-color:#000000;
+}
+svg[Attributes Style] {
+    fill: rgb(0, 0, 0) !important;
+    height: 22;
+    width: 22;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+}
+.text-secondary {
+    color: #ffffff !important;
+}
+.content-section {
+    background: #333333 !important;
+    padding: 10px 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    margin-top: 5rem;
+}
+ul {
+  margin: 0;
+}
+
+.bg-steel {
+  background-color: #000000;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+.media {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    margin-top: 5rem;
+}
+.media-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    margin-top: 2%;
+    flex: 1;
+}
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+#nav{
+    align-item:center;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+a:active{
+color:blue;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+.btn-success {
+    color: #ffffff;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+.btn-success:visited {
+    color: #ffffff;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+.btn-success:active {
+    color: #ffffff;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+.btn-success:hover {
+    color: #ffffff;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+.nav-link {
+    color: rgb(255,255,255) !important;
+}
+a {
+    color: #ffffff !important;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+#link{
+    text-decoration:none;
+    background-color:green;
+
+}</style>
+    {%block design%}
+    {% endblock %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">-->
+
+    {% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+</head>
+<body>
+    <main role="main" class="container mt-2">
+        
+      <div class="row my-2">
+
+          {% block content %}{% endblock %}
+        </div>
+
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script>
+    var userid=document.getElementById('Cuser');
+    var userFriends=document.getElementById('Cuserfriends');
+    function search(){
+        var id =document.getElementById('search');
+    }
+<!--    $('#poplist').onclick(function(){-->
+<!--    $('#popcart').popover('show');-->
+<!--    });-->
+cart={}
+userid=document.getElementById('Cuser').value;
+console.log(userid);
+console.log("hi");
+cart = userFriends.value;
+console.log(cart);
+sum=0;
+function pop(){
+var popstr = "";
+popstr = popstr + "<div class='mx-2 my-2'>";
+Array.from(cart).forEach(function(dict){
+    console.log(dict)
+    if (dict['followers']=="false"){
+      popstr=popstr+`<div class="alert alert-primary" role="alert"><img src="`+dict["image"]+`" style="height:50px;width:50px">`;
+        popstr=popstr+dict['name']+`<a href="../accept/"`+dict['id']+`"><button class="btn ml-3" id="accept`+dict['id']+`" onclick="fun1(this)">accept</button></a></div><br/>`;
+     }
+})
+popstr = popstr + "</div>";
+document.getElementById('poplist').setAttribute('data-content', popstr);
+$('#poplist').popover('show');
+}
+$('#poplist').popover();
+<!--document.getElementById('follow').innerHTML=sum;-->
+function fun3(s){
+<!-- id1=s.id.slice(6,);-->
+<!-- console.log(id1);-->
+<!--   cart[id1][3]=true;-->
+<!--   localStorage.setItem(userid, JSON.stringify(cart));-->
+<!--   document.getElementById('div'+id1).innerHTML="";-->
+<!--   var flag=true;-->
+<!--   var name=document.getElementById('name').innerHTML;-->
+<!--    var image=document.getElementById('image').src;-->
+ }
+$('[data-toggle="popover"]').popover({
+    container: 'body'
+});
+</script>
+    {%block js%}
+    {% endblock %}
+</body>
+</html>
+
