@@ -4,6 +4,10 @@ from PIL import Image
 from datetime import date
 # # Create your models here.
 
+class UserOTP(models.Model):
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
+	time_st = models.DateTimeField(auto_now = True)
+	otp = models.SmallIntegerField()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -27,3 +31,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.StudentFirstName+" "+self.StudentMiddleName+" "+self.StudentLastName+" Profile"
 
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(max_length=500)
+    link = models.CharField(max_length=500)
+    seen = models.BooleanField(default=False)
+ 

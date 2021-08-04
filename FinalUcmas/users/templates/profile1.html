@@ -1,4 +1,4 @@
-{% extends "blog/base.html" %}
+{% extends "base.html" %}
 {%block design%}
 <style>
 #link{ text-decoration:none;
@@ -39,56 +39,5 @@
 {% endblock content %}
 {%block js%}
 <script>
-var friends=document.getElementById('friends');
-var userid=document.getElementById('userid').value;
-var Cuserid=document.getElementById('Cuserid').value;
-var CuserFriends=document.getElementById('CuserFriends').value;
-if (Cuserid==userid){
-divpr.style.display="none";
-}
-if(friends.innerHTML!="follow"){
-friends.disabled=true;
-}
-cart=eval(CuserFriends);
-function pop(){
-var popstr = "";
-popstr = popstr + "<div class='mx-2 my-2'>";
-Array.from(cart).forEach(function(dict){
-    console.log(dict)
-    if (dict['followers']=="false"){
-      popstr=popstr+`<div class="alert alert-primary" role="alert"><img src="http://192.168.0.104:8000/media/`+dict["image"]+`" style="height:50px;width:50px">`;
-        popstr=popstr+dict['name']+`<a href="../accept/"`+dict['id']+`"><button class="btn ml-3" id="accept`+dict['id']+`" onclick="fun1(this)">accept</button></a></div><br/>`;
-     }
-})
-popstr = popstr + "</div>";
-document.getElementById('poplist').setAttribute('data-content', popstr);
-$('#poplist').popover('show');
-}
-<!--if(localStorage.getItem(userid) == null){-->
-<!--var cart = {};-->
-<!--}-->
-<!--else-->
-<!--{-->
-<!--cart = JSON.parse(localStorage.getItem(userid));-->
-<!--}-->
-<!--if(localStorage.getItem(Cuserid) == null){-->
-<!--var cart1 = {};-->
-<!--}-->
-<!--else-->
-<!--{-->
-<!--cart1 = JSON.parse(localStorage.getItem(Cuserid));-->
-<!--}-->
-<!--$('.divpr').on('click', 'button.friend', function(){-->
-<!--    flag=false;-->
-<!--    CuserName=document.getElementById('CuserName').value;-->
-<!--    CuserProfile=document.getElementById('CuserProfile').src;-->
-<!--    cart[Cuserid]=[Cuserid,CuserName,CuserProfile,flag]-->
-<!--&lt;!&ndash;    var uname=document.getElementById('name').innerHTML;&ndash;&gt;-->
-<!--&lt;!&ndash;    var img=document.getElementById('image').src;&ndash;&gt;-->
-<!--&lt;!&ndash;    cart1[userid]=[userid,uname,img,flag]&ndash;&gt;-->
-<!--    localStorage.setItem(userid, JSON.stringify(cart));-->
-<!--&lt;!&ndash;    localStorage.setItem(Cuserid, JSON.stringify(cart1));&ndash;&gt;-->
-<!--    friends.innerHTML="request send";-->
-<!--});-->
 </script>
 {% endblock %}
