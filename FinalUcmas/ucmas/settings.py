@@ -26,7 +26,7 @@ SECRET_KEY = '+9c&azkg*&n)&y%o55-23253gat9#)_*v*iy!38r&kfmu5@9hm'
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',
     'crispy_forms',
     'rest_framework',
+    'verify_email.apps.VerifyEmailConfig',
 ]
 SITE_ID=1
 MIDDLEWARE = [
@@ -125,7 +126,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, Jhttp://127.0.0.1:8000/password-reset-confirm/NDQ/aqv1mc-526445988596001dc922b9257c088288/avaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
@@ -139,4 +140,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+# step-1 is add this on settings.py for email verification
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'parthacademyucmas@gmail.com' 
+EMAIL_HOST_PASSWORD ='#@$NiAnTr369$@#'
+EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'noreply<no_reply@127:0.0.1:8000>'
 
