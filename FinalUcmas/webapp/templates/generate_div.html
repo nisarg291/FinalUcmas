@@ -24,7 +24,7 @@
     .main{
         margin-top:12vh !important;
     }
-    {% endblock %}
+    {% endblock design %}
     {%block title%} ParthUcmas : Home{%endblock title%}
     {% block listeningflashactive %}active{% endblock listeningflashactive %}
     {% block content %}
@@ -58,38 +58,37 @@
         <!-- <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">Next</div> -->
     </div>
     </div>
-    {% endblock %}
+    {% endblock content %}
     {%block js %}
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
         async function speak1(){
+        nums=document.getElementsByClassName('nums');    
         num1=document.getElementsByClassName('num1');
         num2=document.getElementsByClassName('num2');
         n=document.getElementById('n');
         ans=document.getElementsByClassName('ans');
         no_ques=parseInt(document.getElementById('no_ques').value);
-        // no_rows=parseInt(document.getElementById('no_rows').value);
         var i,j;
-        for(i=0;i<num1.length;i++){
+        for(i=0; i < nums.length; i++){
                 n.style.display=''
                 n.innerHTML=String('Question No:'+(i+1))
                 console.log(String(num1[i].innerHTML))
                 console.log(String(num1[2].innerHTML))
                 var msg = new SpeechSynthesisUtterance(String(ans[i].innerHTML));
-                // msg.text=String(i);
+                
                 msg.lang = 'en-US';
                 msg.rate = 2;
                 speechSynthesis.speak(msg);
                 await sleep(2000);
                 var msg = new SpeechSynthesisUtterance(String('Divide By'));
-                // msg.text=String(i);
+                
                 msg.lang = 'en-US';
                 msg.rate = 2;
                 speechSynthesis.speak(msg);
                 await sleep(2000);
                 var msg = new SpeechSynthesisUtterance(String(num2[i].innerHTML));
-                // msg.text=String(i);
                 msg.lang = 'en-US';
                 msg.rate = 2;
                 speechSynthesis.speak(msg);
@@ -98,18 +97,13 @@
                 await sleep(5000);
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Answer is "+String(num1[i].innerHTML)))
                 await sleep(2000);
-                if(i!=(num1.length-1)){
+                if(i!=(nums.length-1)){
                     speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
                     await sleep(1000)
                 }
                
         }
         back.style.display='';
-        // function speak3(){
-        //     // back.style.display='';
-        //     window.location.href = "flash";
-        // }
     }
-    // speak1()
     
     {% endblock js %}

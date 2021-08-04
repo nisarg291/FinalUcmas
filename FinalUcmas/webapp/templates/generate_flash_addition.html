@@ -24,6 +24,44 @@
         .main{
             margin-top:12vh !important;
         }
+        #display_number{
+            height:60vh;
+            font-size:70px;
+            text-align: center;
+            align-items:center;
+            color:red;
+            padding-top:20vh;
+        }
+        #back{
+            position:absolute;
+            top:80vh;
+            left:85vw;
+        }
+        #start{
+            position:absolute;
+            top:80vh;
+            left:80vw;
+        }
+        @media only screen and (max-width:600px){
+            #display_number{
+            height:60vh;
+            font-size:40px !important;
+            text-align: center;
+            align-items:center;
+            color:red;
+            padding-top:20vh;
+            }
+            #back{
+                position:absolute;
+                top:70vh;
+                left:60vw;
+            }
+            #start{
+                position:absolute;
+                top:70vh;
+                left:40vw;
+            }
+        }
     {% endblock %}
     {%block title%} ParthUcmas : Home{%endblock title%}
     {% block listeningflashactive %}active{% endblock listeningflashactive %}
@@ -33,9 +71,10 @@
         <div>
             <div id="no_ques" style="display:none">{{no_of_questions}}</div>
             <div id="no_rows" style="display:none">{{no_of_rows}}</div>
+            <div id="no_of_digits" style="display:none">{{no_of_digits}}</div>
             <div id="ques_speed" class="ques" style="display:none">{{questions_speed}}</div>
             <div id="all_question" style="display: none;">{{questions}}</div>
-            <div id="n" class="mt-5 ml-5" style="display:none; font-size:30px;color:red"></div>
+            <div id="n" class="mt-6 ml-5" style="display:none; font-size:30px;color:red"></div>
             {% for que in questions%}
                 
                 <div class="nums ml-1 mr-1 mt-5 col-2" style="display:none;border:1px solid black;">
@@ -49,13 +88,12 @@
             {%endfor%}
         </div><center>
         <div class="col-12 mt-5" id="display_number">
-
         </div></center>
-        <div class="btn btn-primary mr-5" style="position:absolute;top:80vh;left:80vw;" onclick="speak2()">start</div>
+        <div class="btn btn-primary mr-5"  id="start" onclick="speak2()">start</div>
         <form action="{% url 'flash_addition' %}">
-        <Button class="btn btn-secondary ml-2" id="back" type="submit" style="position:absolute;top:80vh;left:85vw;display:none">Back</Button>
+        <Button class="btn btn-secondary ml-2" id="back" type="submit" style="display:none">Back</Button>
         </form>
-        <!-- <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">Next</div> -->
+        
     </div>
     </div>
     {% endblock %}
@@ -67,52 +105,95 @@
         async function speak2(){
         nums=document.getElementsByClassName('nums');
         nums2=document.getElementsByClassName('nums2');
+        console.log(nums.length)
+        console.log(nums2.length)
         n=document.getElementById('n');
         ans=document.getElementsByClassName('ans');
         no_ques=parseInt(document.getElementById('no_ques').innerHTML);
         no_rows=parseInt(document.getElementById('no_rows').innerHTML);
+        no_of_digits=parseInt(document.getElementById('no_of_digits').innerHTML);
+
         questions=(document.getElementById('all_question').innerHTML);
         ques_speed=(document.getElementById('ques_speed'));
         display_number=document.getElementById('display_number');
         console.log(questions)
+
+        console.log(ques_speed.innerHTML)
         var i,j;
         var no_of_rows=nums2.length/nums.length;
-        for(j=0;j<nums.length;j++){
-            
-        }
-        var c=0;
-        var d=no_of_rows;
-        for(i=0;i<nums2.length;i++){
+     
+        var c= 0;
+        var d= no_of_rows;
+        for(i=0; i < nums2.length; i++){
             n.style.display=''
-            
             n.innerHTML=String('Question No : '+(c+1))
             speed=parseInt(ques_speed.innerHTML);
-            display_number.innerHTML=String(nums2[i].innerHTML)
-            var msg = new SpeechSynthesisUtterance(String(nums2[i].innerHTML));
-            // msg.text=String(i);
-            msg.lang = 'en-US';
-            msg.rate=parseInt(ques_speed.innerHTML);
-            // msg.rate=6;
-           
-            // speechSynthesis.speak(msg);
-            if(speed==1){await sleep(2000);}
-            if(speed==3){await sleep(1500);}
-            if(speed==6){await sleep(1000);}
+            speechSynthesis.speak(new SpeechSynthesisUtterance(nums2[i].innerHTML));
+            display_number.innerHTML=String(nums2[i].innerHTML);
+            if(speed==1 && no_of_digits==1){await sleep(5000);}
+            if(speed==1 && no_of_digits==2){await sleep(6000);}
+            if(speed==1 && no_of_digits==3){await sleep(5000);}
+            if(speed==1 && no_of_digits==4){await sleep(6000);}
+            if(speed==3 && no_of_digits==1){await sleep(3000);}
+            if(speed==3 && no_of_digits==2){await sleep(4500);}
+            if(speed==3 && no_of_digits==3){await sleep(7000);}
+            if(speed==3 && no_of_digits==4){await sleep(5000);}
+            if(speed==6 && no_of_digits==1){await sleep(2000);}
+            if(speed==6 && no_of_digits==2){await sleep(4000);}
+            if(speed==6 && no_of_digits==3){await sleep(6000);}
+            if(speed==6 && no_of_digits==4){await sleep(5000);}
                 
-            if(i==(d-1) && c<nums.length){
-                // n.style.display=''
-                // n.innerHTML=String('Question No:'+(j+1))
-                // speechSynthesis.speak(new SpeechSynthesisUtterance(' that is ? '));
+            if( i==(d-1) && c< nums.length){
+                awair sleep(3000)
+                //n.style.display=''
+                //n.innerHTML=String('Question No:'+(j+1))
+                speechSynthesis.speak(new SpeechSynthesisUtterance(' that is ? '));
                 display_number.innerHTML=String('that is ?');
-                await sleep(3000);
-                // speechSynthesis.speak(new SpeechSynthesisUtterance(" Answer is "+String(ans[c].innerHTML)))
+                if(speed==1 && no_of_digits==1){await sleep(6000);}
+                if(speed==1 && no_of_digits==2){await sleep(7000);}
+                if(speed==1 && no_of_digits==3){await sleep(8000);}
+                if(speed==1 && no_of_digits==4){await sleep(9000);}
+                if(speed==3 && no_of_digits==1){await sleep(5000);}
+                if(speed==3 && no_of_digits==2){await sleep(7000);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(8500);}
+                if(speed==6 && no_of_digits==1){await sleep(4000);}
+                if(speed==6 && no_of_digits==2){await sleep(7000);}
+                if(speed==6 && no_of_digits==3){await sleep(7000);}
+                if(speed==6 && no_of_digits==4){await sleep(8000);}
+                speechSynthesis.speak(new SpeechSynthesisUtterance('Answer is '+(ans[c].innerHTML)))
                 display_number.innerHTML=String(' Answer is '+String(ans[c].innerHTML))
-                await sleep(2000);
-                d=d+no_of_rows;
-                if(i!=(nums2.length-1)){
-                    // speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
-                    display_number.innerHTML=String("Next")
-                    await sleep(1000)
+                if(speed==1 && no_of_digits==1){await sleep(6000);}
+                if(speed==1 && no_of_digits==2){await sleep(7000);}
+                if(speed==1 && no_of_digits==3){await sleep(8000);}
+                if(speed==1 && no_of_digits==4){await sleep(11000);}
+                if(speed==3 && no_of_digits==1){await sleep(5000);}
+                if(speed==3 && no_of_digits==2){await sleep(7000);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(10000);}
+                if(speed==6 && no_of_digits==1){await sleep(4000);}
+                if(speed==6 && no_of_digits==2){await sleep(7000);}
+                if(speed==6 && no_of_digits==3){await sleep(7000);}
+                if(speed==6 && no_of_digits==4){await sleep(9000);}
+                //await sleep(2000);
+                d= d + no_of_rows;
+                if(i!= (nums2.length-1)){
+                    speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    //speechSynthesis.cancel();
+                    display_number.innerHTML= String("Next")
+                    //await sleep(4000)
+                    if(speed==1 && no_of_digits==1){await sleep(4000);}
+                    if(speed==1 && no_of_digits==2){await sleep(7000);}
+                    if(speed==1 && no_of_digits==3){await sleep(8000);}
+                    if(speed==1 && no_of_digits==4){await sleep(11000);}
+                    if(speed==3 && no_of_digits==1){await sleep(4000);}
+                    if(speed==3 && no_of_digits==2){await sleep(7000);}
+                    if(speed==3 && no_of_digits==3){await sleep(7000);}
+                    if(speed==3 && no_of_digits==4){await sleep(10000);}
+                    if(speed==6 && no_of_digits==1){await sleep(4000);}
+                    if(speed==6 && no_of_digits==2){await sleep(7000);}
+                    if(speed==6 && no_of_digits==3){await sleep(7000);}
+                    if(speed==6 && no_of_digits==4){await sleep(9000);}
                 }
                 c++;
             }
@@ -124,33 +205,6 @@
         }
 
     }
-    //     for(i=0;i<nums.length;i++){
-    //             n.style.display=''
-    //             n.innerHTML=String('Question No:'+(i+1))
-    //             console.log(String(nums[i].innerHTML)) 
-    //             str1=String(nums[i].innerHTML);
-    //             numbers=str1.split(' ')
-    //             console.log(numbers)
-    //             var msg = new SpeechSynthesisUtterance(String(nums[i].innerHTML));
-    //                 // msg.text=String(i);
-    //             msg.lang = 'en-US';
-    //             msg.rate=parseInt(ques_speed.innerHTML);
-    //                 // msg.rate=6;
-    //             speechSynthesis.speak(msg);
-    //             await sleep(1000);
-                
-    //             speechSynthesis.speak(new SpeechSynthesisUtterance('that is ?'));
-    //             display_number.innerHTML='that is ?';
-    //             await sleep(8000);
-    //             speechSynthesis.speak(new SpeechSynthesisUtterance("Answer is "+String(ans[i].innerHTML)))
-    //             display_number.innerHTML=String('Answer is'+String(ans[i].innerHTML))
-    //             await sleep(3000);
-    //             if(i!=(nums.length-1)){
-    //                 speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
-    //             }
-               
-    //     }
-    // }
-    // speak1()
+  
     
     {%endblock js %}

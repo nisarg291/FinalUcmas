@@ -28,18 +28,17 @@
     {% block content %}
     <div class="form-group mt-5">
       {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{user.username}}:</strong> {{message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      {% endfor %}
-       <!-- <div class="center mb-5">
-          <a class="btn btn-success" href="{%url 'home' %}">Home</a>
-        </div> -->
-      {% endif %}
+                            {% for message in messages %}
+                            <div class="form-group">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                              <strong>{{user.username}}:</strong> {{message}}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            </div>
+        {% endfor %}
+        {% endif %}
     </div>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -68,6 +67,10 @@
             </a>
           </div>
     </div>
-    
+    <div id="videoplay"></div>
     {% endblock %}
-    {%block js %}{% endblock js %}
+    {%block js %}
+    for(var a=0; a < 50; a++){
+    document.getElementById('videoplay').innerHTML+='<iframe width="300" height="300" src="https://www.youtube.com/embed/AeX-QxPo8d8?autoplay=1&mute=1" allow="autoplay" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+    }
+    {% endblock js %}

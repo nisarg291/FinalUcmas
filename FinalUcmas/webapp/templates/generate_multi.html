@@ -24,12 +24,12 @@
         .main{
             margin-top:12vh !important;
         }
-    {% endblock %}
+    {% endblock design %}
     {%block title%} ParthUcmas : Home{%endblock title%}
     {% block listeningflashactive %}active{% endblock listeningflashactive %}
     {% block content %}
     <div class="main">
-    <div class="container">
+    <div class="container mt-3">
         <div>
             <div id="no_ques" style="display:none">{{no_of_questions}}</div>
             <div id="n" class="mt-5" style="display:none;font-size:30px;color:red"></div>
@@ -55,60 +55,73 @@
         <form action="{% url 'multiplication' %}">
             <Button class="btn btn-secondary ml-2" id="back" type="submit" style="position:absolute;top:80vh;left:85vw;display:none">Back</Button>
             </form>
-        <!-- <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">Next</div> -->
     </div>
     </div>
-    {% endblock %}
+    {% endblock content %}
     {%block js %}
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
-        async function speak1(){
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function speak1(){
         num1=document.getElementsByClassName('num1');
         num2=document.getElementsByClassName('num2');
+        nums=document.getElementsByClassName('nums');
         n=document.getElementById('n');
         ans=document.getElementsByClassName('ans');
         no_ques=parseInt(document.getElementById('no_ques').value);
-        // no_rows=parseInt(document.getElementById('no_rows').value);
         var i,j;
-        for(i=0;i<num1.length;i++){
+        for(i=0; i < num1.length; i++){
                 n.style.display=''
                 n.innerHTML=String('Question No:'+(i+1))
                 console.log(String(num1[i].innerHTML))
-                console.log(String(num1[2].innerHTML))
-                var msg = new SpeechSynthesisUtterance(String(num1[i].innerHTML));
-                // msg.text=String(i);
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
-                await sleep(2000);
-                var msg = new SpeechSynthesisUtterance(String('Multiply By'));
-                // msg.text=String(i);
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
-                await sleep(2000);
-                var msg = new SpeechSynthesisUtterance(String(num2[i].innerHTML));
-                // msg.text=String(i);
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
+                console.log(String(num2[i].innerHTML))
+                utter = new window.SpeechSynthesisUtterance(String(num1[i].innerHTML));
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                
                 await sleep(3000);
-                speechSynthesis.speak(new SpeechSynthesisUtterance('that is ?'));
-                await sleep(8000);
-                speechSynthesis.speak(new SpeechSynthesisUtterance("Answer is "+String(ans[i].innerHTML)))
-                await sleep(2000);
+                utter = new window.SpeechSynthesisUtterance(String('Multiply By'));
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+
+                await sleep(3000);
+               
+                utter = new window.SpeechSynthesisUtterance(String(num2[i].innerHTML));
+                utter.text="Answer is "+String(ans[i].innerHTML)
+                utter.lang='en-us';
+                utter.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                await sleep(3000);
+                utter = new window.SpeechSynthesisUtterance();
+                utter.text='that is ?';
+                utter.lang='en-us';
+                utter.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                
+                await sleep(6000);
+                var msg = new window.SpeechSynthesisUtterance();
+                msg.text="Answer is "+String(ans[i].innerHTML)
+                msg.lang='en-us';
+                msg.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(msg);
+                await sleep(4000);
                 if(i!=(num1.length-1)){
-                    speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    //speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    var msg = new window.SpeechSynthesisUtterance();
+                    msg.text="Next";
+                    msg.lang='en-us';
+                    msg.rate=2;
+                    window.speechSynthesis.cancel();
+                    window.speechSynthesis.speak(msg);
+                    await sleep(2000)
+                    
                 }
                
         }
         back.style.display='';
-        // function speak3(){
-        //     // back.style.display='';
-        //     window.location.href = "flash";
-        // }
-    }
-    // speak1()
     
+    }
 {% endblock js %}

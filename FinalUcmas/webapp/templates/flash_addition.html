@@ -125,7 +125,7 @@
     {% block content %}
     <main class="container">
     <div class="absolute-center text-center content-section">
-        <div class="col-4 card center">
+        <div class="col-md-4 col-sm-10 card center">
             <div class="card-body">
                 <form action="{% url 'generate_flash_addition' %}" method="post">{% csrf_token %}
                     <div class="mt-3 form-group">
