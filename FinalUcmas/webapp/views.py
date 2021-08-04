@@ -7,6 +7,7 @@ import datetime
 import requests
 # import webbrowser
 from django.contrib.auth.decorators import login_required
+from verify_email.email_handler import send_verification_email
 import os
 # import smtplib
 import time
@@ -139,6 +140,7 @@ def validate(request):
 
             
 # for addition generator page for flash card
+    # return render(request,"generate.html",context=content)
 def generate_flash_addition(request):
     questions=[]
     ans1=[]
@@ -226,9 +228,9 @@ def generate_flash_addition(request):
             print(questions)
             print(ans1)
           
-            return render(request,"generate_flash_addition.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows,'questions_speed':questions_speed})
+            return render(request,"generate_flash_addition.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows,'questions_speed':questions_speed,'no_of_digits':no_of_digits})
         except:
-            return redirect('flash_addition')
+            return redirect('home')
 # for addition generator page for listening card   
 def generate_add(request):
     questions=[]
@@ -237,7 +239,7 @@ def generate_add(request):
         no_of_digits=int(request.POST.get("digits"))
         no_of_rows=int(request.POST.get("rows"))
         no_of_questions=int(request.POST.get("questions"))
-        
+        questions_speed=int(request.POST.get('questions_speed'))
         print(no_of_digits)
         print(no_of_questions)
         print(no_of_rows)
@@ -315,7 +317,7 @@ def generate_add(request):
         print(questions)
         print(ans1)
           
-        return render(request,"generate_add.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows})
+        return render(request,"generate_add.html",{'questions':questions,'ans':ans1,'no_of_questions':no_of_questions,'no_of_rows':no_of_rows, 'no_of_digits':no_of_digits,'questions_speed':questions_speed})
     
     # return render(request,"generate.html",context=content)
 
@@ -347,6 +349,8 @@ def generate_multi(request):
             'no_of_questions':no_of_questions,
             'questions':questions,
             'ans':ans,
+            'no_of_first_digits':no_of_first_digits,
+            'no_of_second_digits':no_of_second_digits,
         }
         return render(request,"generate_multi.html",context)
 
@@ -379,6 +383,8 @@ def generate_flash_multi(request):
             'questions':questions,
             'ans':ans,
             'questions_speed':questions_speed,
+            'no_of_first_digits':no_of_first_digits,
+            'no_of_second_digits':no_of_second_digits,
         }
         return render(request,"generate_flash_multi.html",context)
 
@@ -410,7 +416,9 @@ def generate_div(request):
             'num2':num2,
             'no_of_questions':no_of_questions,
             'questions':questions,
-            'ans':ans
+            'ans':ans,
+            'no_of_first_digits':no_of_first_digits,
+            'no_of_second_digits':no_of_second_digits,
         }
         return render(request,'generate_div.html',context)
 
@@ -445,5 +453,7 @@ def generate_flash_div(request):
             'questions':questions,
             'ans':ans,
             'questions_speed':questions_speed,
+            'no_of_first_digits':no_of_first_digits,
+            'no_of_second_digits':no_of_second_digits,
         }
         return render(request,'generate_flash_div.html',context)
