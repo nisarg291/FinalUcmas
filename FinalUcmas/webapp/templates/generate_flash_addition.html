@@ -89,7 +89,7 @@
         </div><center>
         <div class="col-12 mt-5" id="display_number">
         </div></center>
-        <div class="btn btn-primary mr-5"  id="start" onclick="speak2()">start</div>
+        <div class="btn btn-primary mr-5"  id="start" onclick="speak1()">start</div>
         <form action="{% url 'flash_addition' %}">
         <Button class="btn btn-secondary ml-2" id="back" type="submit" style="display:none">Back</Button>
         </form>
@@ -98,11 +98,11 @@
     </div>
     {% endblock %}
     {%block js %}
-      
-        function sleep(ms) {
+     
+function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
         }
-        async function speak2(){
+        async function speak1(){
         nums=document.getElementsByClassName('nums');
         nums2=document.getElementsByClassName('nums2');
         console.log(nums.length)
@@ -116,20 +116,22 @@
         questions=(document.getElementById('all_question').innerHTML);
         ques_speed=(document.getElementById('ques_speed'));
         display_number=document.getElementById('display_number');
-        console.log(questions)
+        console.log(questions);
 
-        console.log(ques_speed.innerHTML)
+        console.log(ques_speed.innerHTML);
         var i,j;
         var no_of_rows=nums2.length/nums.length;
      
         var c= 0;
         var d= no_of_rows;
         for(i=0; i < nums2.length; i++){
-            n.style.display=''
-            n.innerHTML=String('Question No : '+(c+1))
+            n.style.display='';
+            
+            n.innerHTML=String('Question No : '+(c+1));
             speed=parseInt(ques_speed.innerHTML);
-            speechSynthesis.speak(new SpeechSynthesisUtterance(nums2[i].innerHTML));
-            display_number.innerHTML=String(nums2[i].innerHTML);
+         //   speechSynthesis.speak(new SpeechSynthesisUtterance(nums2[i].innerHTML));
+            display_number.innerHTML=(nums2[i].innerHTML);
+         
             if(speed==1 && no_of_digits==1){await sleep(5000);}
             if(speed==1 && no_of_digits==2){await sleep(6000);}
             if(speed==1 && no_of_digits==3){await sleep(5000);}
@@ -143,11 +145,11 @@
             if(speed==6 && no_of_digits==3){await sleep(6000);}
             if(speed==6 && no_of_digits==4){await sleep(5000);}
                 
-            if( i==(d-1) && c< nums.length){
-                awair sleep(3000)
+            if(i==(d-1) && c< nums.length){
+                await sleep(3000)
                 //n.style.display=''
                 //n.innerHTML=String('Question No:'+(j+1))
-                speechSynthesis.speak(new SpeechSynthesisUtterance(' that is ? '));
+                //speechSynthesis.speak(new SpeechSynthesisUtterance(' that is ? '));
                 display_number.innerHTML=String('that is ?');
                 if(speed==1 && no_of_digits==1){await sleep(6000);}
                 if(speed==1 && no_of_digits==2){await sleep(7000);}
@@ -161,8 +163,8 @@
                 if(speed==6 && no_of_digits==2){await sleep(7000);}
                 if(speed==6 && no_of_digits==3){await sleep(7000);}
                 if(speed==6 && no_of_digits==4){await sleep(8000);}
-                speechSynthesis.speak(new SpeechSynthesisUtterance('Answer is '+(ans[c].innerHTML)))
-                display_number.innerHTML=String(' Answer is '+String(ans[c].innerHTML))
+                //speechSynthesis.speak(new SpeechSynthesisUtterance('Answer is '+(ans[c].innerHTML)))
+                display_number.innerHTML=String(' Answer is '+(ans[c].innerHTML))
                 if(speed==1 && no_of_digits==1){await sleep(6000);}
                 if(speed==1 && no_of_digits==2){await sleep(7000);}
                 if(speed==1 && no_of_digits==3){await sleep(8000);}
@@ -178,7 +180,7 @@
                 //await sleep(2000);
                 d= d + no_of_rows;
                 if(i!= (nums2.length-1)){
-                    speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    //speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
                     //speechSynthesis.cancel();
                     display_number.innerHTML= String("Next")
                     //await sleep(4000)
@@ -204,7 +206,5 @@
             window.location.href = "flash";
         }
 
-    }
-  
-    
+    }    
     {%endblock js %}
