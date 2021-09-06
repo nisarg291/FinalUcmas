@@ -87,7 +87,6 @@
                 await sleep(3000);
                
                 utter = new window.SpeechSynthesisUtterance(String(num2[i].innerHTML));
-                utter.text="Answer is "+String(ans[i].innerHTML)
                 utter.lang='en-us';
                 utter.rate=2;
                 window.speechSynthesis.cancel();
@@ -100,14 +99,13 @@
                 window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(utter);
                 
-                await sleep(6000);
-                var msg = new window.SpeechSynthesisUtterance();
-                msg.text="Answer is "+String(ans[i].innerHTML)
-                msg.lang='en-us';
-                msg.rate=2;
+                await sleep(3000);
+                var utter = new window.SpeechSynthesisUtterance("Answer is "+String(ans[i].innerHTML));
+                utter.lang='en-us';
+                utter.rate=2;
                 window.speechSynthesis.cancel();
-                window.speechSynthesis.speak(msg);
-                await sleep(4000);
+                window.speechSynthesis.speak(utter);
+                await sleep(3000);
                 if(i!=(num1.length-1)){
                     //speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
                     var msg = new window.SpeechSynthesisUtterance();
@@ -116,7 +114,7 @@
                     msg.rate=2;
                     window.speechSynthesis.cancel();
                     window.speechSynthesis.speak(msg);
-                    await sleep(2000)
+                    await sleep(2000);
                     
                 }
                
