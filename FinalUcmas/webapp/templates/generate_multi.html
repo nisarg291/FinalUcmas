@@ -1,0 +1,125 @@
+{%extends 'base1.html'%}
+{%load static%}
+    {%block design%}
+    
+        #n1{
+
+        }
+        .carousel_img{
+            height:70vh;
+            width:100vw;
+        }
+        #carouselExampleIndicators{
+            margin-top:100px;
+        }
+        .carousel-item{
+            /* width:90vw; */
+            align-items: center !important;
+            text-align: center !important;
+        }
+        .carousel-inner{
+            align-items: center !important;
+            text-align: center !important;
+        }
+        .main{
+            margin-top:12vh !important;
+        }
+    {% endblock design %}
+    {%block title%} ParthUcmas : Home{%endblock title%}
+    {% block listeningflashactive %}active{% endblock listeningflashactive %}
+    {% block content %}
+    <div class="main">
+    <div class="container mt-3">
+        <div>
+            <div id="no_ques" style="display:none">{{no_of_questions}}</div>
+            <div id="n" class="mt-5" style="display:none;font-size:30px;color:red"></div>
+            {% for que in questions%}
+                
+                <div class="nums ml-1 mr-1 mt-5 col-2" style="display:none;border:1px solid black;">{{que.counter}}
+                {% for i in que%}
+                    {{i}}
+                {%endfor%}
+                </div>
+            {%endfor%}
+            {% for num in num1%}
+                <div class="num1" style="display: none;">{{num}}</div>
+            {%endfor%}
+            {% for num in num2%}
+                <div class="num2" style="display: none;">{{num}}</div>
+            {%endfor%}
+            {%for an in ans%}
+                <div class="ans" style="display:none">{{an}}</div>
+            {%endfor%}
+        </div>
+        <div class="btn btn-primary" style="position:absolute;top:80vh;left:80vw;" onclick="speak1()">start</div>
+        <form action="{% url 'multiplication' %}">
+            <Button class="btn btn-secondary ml-2" id="back" type="submit" style="position:absolute;top:80vh;left:85vw;display:none">Back</Button>
+            </form>
+    </div>
+    </div>
+    {% endblock content %}
+    {%block js %}
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function speak1(){
+        num1=document.getElementsByClassName('num1');
+        num2=document.getElementsByClassName('num2');
+        nums=document.getElementsByClassName('nums');
+        n=document.getElementById('n');
+        ans=document.getElementsByClassName('ans');
+        no_ques=parseInt(document.getElementById('no_ques').value);
+        var i,j;
+        for(i=0; i < num1.length; i++){
+                n.style.display=''
+                n.innerHTML=String('Question No:'+(i+1))
+                console.log(String(num1[i].innerHTML))
+                console.log(String(num2[i].innerHTML))
+                utter = new window.SpeechSynthesisUtterance(String(num1[i].innerHTML));
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                
+                await sleep(3000);
+                utter = new window.SpeechSynthesisUtterance(String('Multiply By'));
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+
+                await sleep(3000);
+               
+                utter = new window.SpeechSynthesisUtterance(String(num2[i].innerHTML));
+                utter.lang='en-us';
+                utter.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                await sleep(3000);
+                utter = new window.SpeechSynthesisUtterance();
+                utter.text='that is ?';
+                utter.lang='en-us';
+                utter.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                
+                await sleep(3000);
+                var utter = new window.SpeechSynthesisUtterance("Answer is "+String(ans[i].innerHTML));
+                utter.lang='en-us';
+                utter.rate=2;
+                window.speechSynthesis.cancel();
+                window.speechSynthesis.speak(utter);
+                await sleep(3000);
+                if(i!=(num1.length-1)){
+                    //speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
+                    var msg = new window.SpeechSynthesisUtterance();
+                    msg.text="Next";
+                    msg.lang='en-us';
+                    msg.rate=2;
+                    window.speechSynthesis.cancel();
+                    window.speechSynthesis.speak(msg);
+                    await sleep(2000);
+                    
+                }
+               
+        }
+        back.style.display='';
+    
+    }
+{% endblock js %}
