@@ -1,37 +1,105 @@
 {%extends 'base1.html'%}
 {%load static%}
 {%block design%}
-    
+
 #n1{
 
 }
 .carousel_img{
-    height:70vh;
-    width:100vw;
+height:70vh;
+width:100vw;
 }
 #carouselExampleIndicators{
-    margin-top:100px;
+margin-top:100px;
 }
 .carousel-item{
-    /* width:90vw; */
-    align-items: center !important;
-    text-align: center !important;
+/* width:90vw; */
+align-items: center !important;
+text-align: center !important;
 }
 .carousel-inner{
-    align-items: center !important;
-    text-align: center !important;
+align-items: center !important;
+text-align: center !important;
 }
 .main{
-    margin-top:12vh !important;
+margin-top:12vh !important;
 }
 {% endblock %}
 {%block title%} ParthUcmas : Competitions{%endblock title%}
 {% block competitionsactive %}active{% endblock competitionsactive %}
 {% block content %}
-<div class="main">
-<div class="col-md-12 col-sm-12">
-    <h1>Competitions</h1>
-</div>
+<div class="main mt-5">
+    <div class="container mt-5">
+        <div class="mt-5 text-white" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="btn btn-success" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Competion
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="accordion-body bg-success">
+                        The UCMAS Competitions are one of its kind event with children attempting 100-200 math problems
+                        in just 8 minutes!
+                        <ul>
+                            <li>Annual Competitions held for UCMAS students at State, National & International Level.
+                            </li>
+                            <li>An arena to face the competitive spirit & challenges.</li>
+                            <li>Competition in various categories & age groups.</li>
+                            <li>Students are recognized with certificates, medals & trophies.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="btn btn-primary collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Graduation Ceremony
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionExample">
+                    <div class="accordion-body bg-primary">
+                        UCMAS Graduation Ceremony is the most awaited annual event. It is organized to recognize the
+                        achievements of UCMAS students who successfully complete the program.
+                        <ul>
+                            <li>Graduation is awarded to every UCMAS students who clear level assessment test for
+                                Advance level and passed the (IGE) Grade 3 (Mental).</li>
+                            <li>A sincere appreciation, recognizing the years of hard work.</li>
+                            <li>An individualized plaque and certificate is awarded to each graduate.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="btn btn-secondary collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        International Grading Exam
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-parent="#accordionExample">
+                    <div class="accordion-body bg-secondary">
+                        The International Grading Exam (IGE) is a standardized testing system set by the UCMAS Global
+                        Principal Office in Malaysia in accreditation with the Chinese Zhusuan/Abacus Association (CZA).
+                        <ul>
+                            <li>An International Certificate is awarded to each participant.</li>
+                            <li>Freedom to select Abacus and/or Mental category based on the child’s
+                                capability/preference.</li>
+                            <li>Flexibility for each student to select a higher/lower level than (s)he has last
+                                completed.</li>
+                            <li>A non- competitive and less pressure driven chance for successful achievement.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 {% endblock content %}
 {%block js %}

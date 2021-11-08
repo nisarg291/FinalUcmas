@@ -7,12 +7,18 @@ import datetime
 import requests
 # import webbrowser
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from verify_email.email_handler import send_verification_email
+from users.models import Profile
 import os
 # import smtplib
+
+from users.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import time
 import random
+from datetime import date
 
+from django.conf import settings
 # from gtts import gTTS
 # engine = pyttsx3.init('sapi5')
 # voices = engine.getProperty('voices')
@@ -29,7 +35,15 @@ import random
 #     engine.say(audio)
 #     engine.runAndWait()
 # # Create your views here.
+from datetime import datetime
 
+def diff_month(d1, d2):
+    return (d1.year - d2.year) * 12 + d1.month - d2.month
+
+assert diff_month(datetime(2010,10,1), datetime(2010,9,1)) 
+assert diff_month(datetime(2010,10,1), datetime(2009,10,1)) == 12
+assert diff_month(datetime(2010,10,1), datetime(2009,11,1)) == 11
+assert diff_month(datetime(2010,10,1), datetime(2009,8,1)) == 14
 # for listening and flash menu page
 @login_required
 def listening_flash_menu(request):
@@ -49,7 +63,30 @@ def levels(request):
 
 @login_required
 def info(request):
-    return render(request,'info.html')
+    u_form = UserUpdateForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
+    Cuser = request.user
+    profile=Profile.objects.get(user=request.user)
+    print(profile.JoiningDate)
+    print(p_form)
+    print(u_form)
+    mess=''
+    level=request.user.profile.ucmaslevel+1;
+    if(diff_month(date.today(),profile.JoiningDate)>=2):
+        mess=f'your fees of level {level} is pending. Please done your payment in 1 week.'
+        send_mail( f"Nisarg - Reminder for Payment of ucmas level {level}",
+                    mess,
+                    settings.EMAIL_HOST_USER,
+                    [request.user.email],
+                    fail_silently=False)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'JoiningDate':profile.JoiningDate, 
+        'message':mess  
+    }
+        
+    return render(request,'info.html',context)
 
 def profile(request):
     return render(request, 'profile.html')
@@ -101,7 +138,7 @@ def multiplication(request):
 # for division Option Page for listening 
 @login_required
 def division(request):
-    return render(request,'division.html')
+    return render(request,'Division.html')
 
 # for listening practice Page
 @login_required 
@@ -332,6 +369,7 @@ def generate_multi(request):
         no_of_first_digits=int(request.POST.get("firstnum_digits"))
         no_of_second_digits=int(request.POST.get("secondnum_digits"))
         no_of_questions=int(request.POST.get("questions"))
+        questions_speed=int(request.POST.get('questions_speed'))
         for que in range(0,no_of_questions):
             question=[]
             j=0
@@ -350,6 +388,7 @@ def generate_multi(request):
             'questions':questions,
             'ans':ans,
             'no_of_first_digits':no_of_first_digits,
+            'questions_speed':questions_speed,
             'no_of_second_digits':no_of_second_digits,
         }
         return render(request,"generate_multi.html",context)
@@ -399,6 +438,7 @@ def generate_div(request):
         no_of_first_digits,no_of_second_digits=division_options.split('÷');
         no_of_first_digits=int(no_of_first_digits)-int(no_of_second_digits)
         no_of_second_digits=int(no_of_second_digits)
+        questions_speed=int(request.POST.get('questions_speed'))
         no_of_questions=int(request.POST.get("questions"))
         for que in range(0,no_of_questions):
             question=[]
@@ -419,6 +459,7 @@ def generate_div(request):
             'ans':ans,
             'no_of_first_digits':no_of_first_digits,
             'no_of_second_digits':no_of_second_digits,
+            'questions_speed':questions_speed,
         }
         return render(request,'generate_div.html',context)
 

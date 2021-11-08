@@ -20,8 +20,9 @@ from django.urls import path,include
 # from users import views as user_views
 from . import views
 urlpatterns = [
-    path("listening/",views.listening,name="listening"),
+    
     path("",views.home,name="home"),
+    path("listening/",views.listening,name="listening"),
     # path("profile/",views.profile,name="profile"),
     path("listening_flash_menu/",views.listening_flash_menu,name="listening_flash_menu"),
     path("generate_add/",views.generate_add,name="generate_add"),

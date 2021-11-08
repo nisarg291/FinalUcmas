@@ -32,6 +32,8 @@
     <div class="container">
         <div>
             <div id="no_ques" style="display:none">{{no_of_questions}}</div>
+            <div id="no_of_digits" style="display:none">{{no_of_first_digits}}</div>
+             <div id="ques_speed" class="ques" style="display:none">{{questions_speed}}</div>
             <div id="n" class="mt-5" style="display:none;font-size:30px;color:red"></div>
             {% for que in questions%}
                 
@@ -70,36 +72,103 @@
         n=document.getElementById('n');
         ans=document.getElementsByClassName('ans');
         no_ques=parseInt(document.getElementById('no_ques').value);
+        ques_speed=(document.getElementById('ques_speed'));
+        no_of_digits=parseInt(document.getElementById('no_of_digits').innerHTML);
         var i,j;
         for(i=0; i < nums.length; i++){
                 n.style.display=''
                 n.innerHTML=String('Question No:'+(i+1))
                 console.log(String(num1[i].innerHTML))
                 console.log(String(num1[2].innerHTML))
-                var msg = new SpeechSynthesisUtterance(String(ans[i].innerHTML));
+                speed=parseInt(ques_speed.innerHTML);
+                speechSynthesis.speak(new SpeechSynthesisUtterance(ans[i].innerHTML));
+                // display_number.innerHTML=String(nums2[i].innerHTML);
+                if(speed==1 && no_of_digits==1){await sleep(5000);}
+                if(speed==1 && no_of_digits==2){await sleep(6000);}
+                if(speed==1 && no_of_digits==3){await sleep(5000);}
+                if(speed==1 && no_of_digits==4){await sleep(6000);}
+                if(speed==3 && no_of_digits==1){await sleep(3000);}
+                if(speed==3 && no_of_digits==2){await sleep(4500);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(5000);}
+                if(speed==6 && no_of_digits==1){await sleep(2000);}
+                if(speed==6 && no_of_digits==2){await sleep(4000);}
+                if(speed==6 && no_of_digits==3){await sleep(6000);}
+                if(speed==6 && no_of_digits==4){await sleep(5000);}
                 
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
-                await sleep(2000);
-                var msg = new SpeechSynthesisUtterance(String('Divide By'));
-                
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
-                await sleep(2000);
-                var msg = new SpeechSynthesisUtterance(String(num2[i].innerHTML));
-                msg.lang = 'en-US';
-                msg.rate = 2;
-                speechSynthesis.speak(msg);
-                await sleep(3000);
+               
+                //await sleep(2000);
+                speechSynthesis.speak(new SpeechSynthesisUtterance(String('Divide By')));
+                if(speed==1 && no_of_digits==1){await sleep(5000);}
+                if(speed==1 && no_of_digits==2){await sleep(6000);}
+                if(speed==1 && no_of_digits==3){await sleep(5000);}
+                if(speed==1 && no_of_digits==4){await sleep(6000);}
+                if(speed==3 && no_of_digits==1){await sleep(3000);}
+                if(speed==3 && no_of_digits==2){await sleep(4500);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(5000);}
+                if(speed==6 && no_of_digits==1){await sleep(2000);}
+                if(speed==6 && no_of_digits==2){await sleep(4000);}
+                if(speed==6 && no_of_digits==3){await sleep(6000);}
+                if(speed==6 && no_of_digits==4){await sleep(5000);}
+                //await sleep(2000);
+                speechSynthesis.speak(new SpeechSynthesisUtterance(num2[i].innerHTML));
+                if(speed==1 && no_of_digits==1){await sleep(5000);}
+                if(speed==1 && no_of_digits==2){await sleep(6000);}
+                if(speed==1 && no_of_digits==3){await sleep(5000);}
+                if(speed==1 && no_of_digits==4){await sleep(6000);}
+                if(speed==3 && no_of_digits==1){await sleep(3000);}
+                if(speed==3 && no_of_digits==2){await sleep(4500);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(5000);}
+                if(speed==6 && no_of_digits==1){await sleep(2000);}
+                if(speed==6 && no_of_digits==2){await sleep(4000);}
+                if(speed==6 && no_of_digits==3){await sleep(6000);}
+                if(speed==6 && no_of_digits==4){await sleep(5000);}
+                //await sleep(3000);
                 speechSynthesis.speak(new SpeechSynthesisUtterance('that is ?'));
-                await sleep(5000);
+                if(speed==1 && no_of_digits==1){await sleep(5000);}
+                if(speed==1 && no_of_digits==2){await sleep(6000);}
+                if(speed==1 && no_of_digits==3){await sleep(5000);}
+                if(speed==1 && no_of_digits==4){await sleep(6000);}
+                if(speed==3 && no_of_digits==1){await sleep(3000);}
+                if(speed==3 && no_of_digits==2){await sleep(4500);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(5000);}
+                if(speed==6 && no_of_digits==1){await sleep(2000);}
+                if(speed==6 && no_of_digits==2){await sleep(4000);}
+                if(speed==6 && no_of_digits==3){await sleep(6000);}
+                if(speed==6 && no_of_digits==4){await sleep(5000);}
+                //await sleep(5000);
                 speechSynthesis.speak(new SpeechSynthesisUtterance("Answer is "+String(num1[i].innerHTML)))
-                await sleep(2000);
-                if(i!=(nums.length-1)){
+                if(speed==1 && no_of_digits==1){await sleep(5000);}
+                if(speed==1 && no_of_digits==2){await sleep(6000);}
+                if(speed==1 && no_of_digits==3){await sleep(5000);}
+                if(speed==1 && no_of_digits==4){await sleep(6000);}
+                if(speed==3 && no_of_digits==1){await sleep(3000);}
+                if(speed==3 && no_of_digits==2){await sleep(4500);}
+                if(speed==3 && no_of_digits==3){await sleep(7000);}
+                if(speed==3 && no_of_digits==4){await sleep(5000);}
+                if(speed==6 && no_of_digits==1){await sleep(2000);}
+                if(speed==6 && no_of_digits==2){await sleep(4000);}
+                if(speed==6 && no_of_digits==3){await sleep(6000);}
+                if(speed==6 && no_of_digits==4){await sleep(5000);}
+                //await sleep(2000);
+            if(i!=(num1.length-1)){
                     speechSynthesis.speak(new SpeechSynthesisUtterance("Next"))
-                    await sleep(1000)
+                    if(speed==1 && no_of_digits==1){await sleep(5000);}
+                    if(speed==1 && no_of_digits==2){await sleep(6000);}
+                    if(speed==1 && no_of_digits==3){await sleep(5000);}
+                    if(speed==1 && no_of_digits==4){await sleep(6000);}
+                    if(speed==3 && no_of_digits==1){await sleep(3000);}
+                    if(speed==3 && no_of_digits==2){await sleep(4500);}
+                    if(speed==3 && no_of_digits==3){await sleep(7000);}
+                    if(speed==3 && no_of_digits==4){await sleep(5000);}
+                    if(speed==6 && no_of_digits==1){await sleep(2000);}
+                    if(speed==6 && no_of_digits==2){await sleep(4000);}
+                    if(speed==6 && no_of_digits==3){await sleep(6000);}
+                    if(speed==6 && no_of_digits==4){await sleep(5000);}
+                    //await sleep(1000)
                 }
                
         }
