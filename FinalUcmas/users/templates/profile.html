@@ -1,0 +1,179 @@
+{% extends "base1.html" %}
+{%block design%}
+#link{ text-decoration:none;
+    background-color:green;
+    }
+    .b1{
+    margin-left:70%;
+    }
+    .s1{
+    margin-left:2%;
+    font-size:20px;
+    }
+    .about{
+  color:blue;
+}
+.center {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* (x, y)  => position */
+	-ms-transform: translate(-50%, -50%);
+	/* IE 9 */
+	-webkit-transform: translate(-50%, -50%);
+	/* Chrome, Safari, Opera */
+}
+.card{
+  padding-top:5vh !important;
+  padding-bottom:5vh !important;
+  margin-top:14vh !important;
+  margin-bottom:10px !important;
+  border-radius:25px !important;
+}
+main .card {
+  background-color: #3475;
+}
+
+body {
+  <!-- background: #fe8c00; /* fallback for old browsers */ -->
+  font-family: 'Poppins', sans-serif !important;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+            color: #212112 !important;
+            color: white !important;
+            //background: #fe8c00;
+            background: -webkit-linear-gradient(
+              to right,
+              #f83600,
+              #fe8c00
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(
+              to right,
+              #f83600,
+              #fe8c00
+            );
+            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg') !important;
+            background-position: center !important;
+            background-repeat: repeat !important;
+            background-size: 7% !important;
+            background-color: #fff !important;
+            overflow-x: hidden !important;
+            transition: all 200ms linear !important;
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  //color: white !important;
+}
+
+h3 {
+  font-family: Times New Roman !important;
+  font-weight: bold;
+}
+hr {
+  border-bottom: solid white 1px;
+}
+.rounded-pill{
+  border-radius: 25px !important;
+}
+.btn {
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ) !important; /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+input {
+  background-color: #3475 !important;
+  color: white !important;
+}
+
+::placeholder {
+  color: white !important;
+}
+.main{
+  margin-top:25vh !important;
+  padding-bottom:5vh !important;
+  padding-top:5vh !important;
+}
+{% endblock %}
+{% block content %}
+  <main class="container"> 
+    <div class="content-section">
+      <div class="col-md-3 col-sm-0 float-l" style="height:12vh !important;width:15vw;float:left"></div>
+        <div class="col-md-7 col-sm-7 my-auto card" style="text-align:center;align-items:center">
+            <div class="card-body col-md-12">
+            <!-- <img class="square-circle account-img" id="image" src="{{ user.profile.image.url }}"> -->
+            <input type="hidden" value="{{user.id}}" id="userid">
+            <!-- <input type="hidden" value="{{Friends}}" id="userFriends"> -->
+            <!-- <a href="../followers" class="mr-3">followers(<span id="follow">0</span>)</a><a class="ml-3" href="../following">following(<span id="following">0</span>)</a> -->
+            <h3 class="text-center text-uppercase">Your Profile</h3>
+            <div class="form-group">
+              <label for="exampleInputEmail1" style="margin-left:0px">UserName :</label>
+              <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.username}} placeholder="Enter email" readonly>
+            </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">FirstName :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.StudentFirstName}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">MiddleName :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.StudentMiddleName}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">LastName :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.StudentLastName}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">BirthDate :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.BirthDate}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.email}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">std :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.std}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Ucmas Level :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.ucmaslevel}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Enroll :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.Enroll}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Hobbies :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.Hobbies}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Refference :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.Refference}} placeholder="Enter email" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Ressidence :</label>
+                <input type="text" class="form-control rounded-pill" id="exampleInputEmail1" aria-describedby="emailHelp" value={{user.profile.Ressidence}} placeholder="Enter email" readonly>
+              </div>
+            <!-- <p class="text-secondary">Skills:<br><div class="alert alert-dark" role="alert">{{user.profile.skill}}</div></p> -->
+            <!-- <a id="link" href="{% url 'edit'%}"><button class="btn btn-success">edit</button></a> -->
+<!--            here user is inbuilt object which reflect the current user which is log in we do not need to pass any dictnary which have key value is user. like in home.html we use {{post.title}} here we need to pass dict which have post as key of dict. -->
+        </div>
+      </div>
+            <div class="col-md-3"></div>
+ 
+    </div>
+{% endblock content %}
+{%block js%}
+
+{% endblock %}
